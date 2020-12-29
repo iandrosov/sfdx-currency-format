@@ -1,0 +1,9 @@
+<apex:page controller="CAL_CurrencyFormatSample">
+<h1>Currency Format Component Sample Page</h1>
+
+<c:CAL_UtilCurrencyFormat_Comp id="total_prepay1" currency_type="JPY" amount="20000000" />
+<c:CAL_UtilCurrencyFormat_Comp id="total_prepay2" currency_type="USD" amount="150.23" />
+<c:CAL_UtilCurrencyFormat_Comp id="total_prepay3" currency_type="EUR" amount="5300.45" />
+
+<c:CAL_UtilMultiCurrencyFormat_Comp currencyList="{!currencyList}"/>
+</apex:page>

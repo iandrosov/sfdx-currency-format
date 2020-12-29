@@ -1,0 +1,37 @@
+<apex:component >
+	<!-- Formatted currency rotating component, display list of currency values in the list providing rotating currency values  -->
+	<apex:attribute name="currencyList" description="Parameter list of currency values" type="CAL_CurrencyWrapper[]" required="false"/>
+	<script>
+						function showValue(element){
+							var sp = element.getElementsByTagName ('div');
+							for (var i = 0; sp.length; i++){
+								if (sp.item(i) != null && sp.item(i).style != null && sp.item(i).style.display != null){
+									if (sp.item(i).style.display == 'block'){
+										sp.item(i).style.display = 'none';
+										var next_idx = i + 2;
+										if (next_idx < sp.length && sp.item(next_idx) != null && sp.item(next_idx).style != null && sp.item(next_idx).style.display != null){
+											sp.item(next_idx).style.display = 'block';
+											return;
+										}else{
+											sp.item(0).style.display = 'block';
+											return;
+										}
+									}
+								}
+								if (sp.item(i) == null)
+								return;
+							}
+						}
+    </script>
+	<div>
+        <a href="#" onclick="showValue(this); return false;">
+        	<apex:variable var="repeatAmountCounter" value="{!1}" />
+        	<apex:repeat value="{!currencyList}" var="pmt_val">
+        		<div style="{!IF(repeatAmountCounter == 1,'display: block;','display: none;')}">
+        			<c:CAL_UtilCurrencyFormat_Comp currency_type="{!pmt_val.currencyCode}" amount="{!pmt_val.amount}" />
+        		</div>
+        		<apex:variable var="repeatAmountCounter" value="{!repeatAmountCounter + 1}" />
+        	</apex:repeat>
+        </a>
+	</div>
+</apex:component>

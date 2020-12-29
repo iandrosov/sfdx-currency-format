@@ -1,0 +1,39 @@
+<apex:component >
+	<apex:attribute name="currency_type" description="Currency type as string USD, JPY, EUR, AUD. This NOT used by controller" type="String" required="true"/>
+	<apex:attribute name="amount" description="Parameter data to be set from controller" type="Decimal" required="false"/>
+	<!-- Format currency display USD, JPY, EURO, Australia Dollar -->
+	<div>
+	<!-- Handle JPY -->
+	<apex:outputPanel layout="none" rendered="{!IF(currency_type == 'JPY','true','false')}">
+                		<apex:outputText value="{0, number, ###,###,###,##0}">
+       						<apex:param value="{!amount}" />
+ 						</apex:outputText>
+ 						円
+	</apex:outputPanel>
+	<!-- Handle USD -->
+	<apex:outputPanel layout="none" rendered="{!IF(currency_type == 'USD','true','false')}">
+                		$
+                		<apex:outputText value="{0, number, ###,###,##0.00}">
+       						<apex:param value="{!amount}" />
+ 						</apex:outputText>
+						<!-- 米ドル -->
+	</apex:outputPanel>
+	<!-- Handle EUR -->
+	<apex:outputPanel layout="none" rendered="{!IF(currency_type == 'EUR','true','false')}">
+                		<apex:outputText value="{0, number, ###,###,##0.00}">
+       						<apex:param value="{!amount}" />
+ 						</apex:outputText>	
+ 						€
+ 						<!-- ユーロ  -->
+	</apex:outputPanel>
+	<!-- Handle AUD -->
+	<apex:outputPanel layout="none" rendered="{!IF(currency_type == 'AUD','true','false')}">
+                		$
+                		<apex:outputText value="{0, number, ###,###,##0.00}">
+       						<apex:param value="{!amount}" />
+ 						</apex:outputText>
+ 						
+						<!-- 豪ドル -->
+	</apex:outputPanel>
+	</div>
+	</apex:component>
